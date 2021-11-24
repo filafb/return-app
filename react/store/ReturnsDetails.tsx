@@ -113,7 +113,7 @@ class ReturnsDetails extends Component<any, any> {
 
   async getProfile() {
     const { rootPath } = this.props.runtime.route
-    return this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
+    return this.props.fetchApi(fetchPath.getProfile()).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState({
           registeredUser: `${response.data.FirstName} ${response.data.LastName}`,

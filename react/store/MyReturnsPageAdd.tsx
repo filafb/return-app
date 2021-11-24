@@ -184,7 +184,7 @@ class MyReturnsPageAdd extends Component<any, State> {
 
   getProfile() {
     const { rootPath } = this.props.runtime.route
-    return this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
+    return this.props.fetchApi(fetchPath.getProfile()).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState({
           userId: response.data.UserId,

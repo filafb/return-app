@@ -37,7 +37,7 @@ const withExtraProps =
 
     useEffect(() => {
       const { rootPath } = route
-      const getProfileUrl = fetchPath.getProfile(rootPath)
+      const getProfileUrl = fetchPath.getProfile()
       fetch(getProfileUrl)
         .then((response) => response.json())
         .then(async (response) => {
