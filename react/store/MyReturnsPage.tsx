@@ -11,6 +11,7 @@ import {
   Link,
   Table,
 } from 'vtex.styleguide'
+import { withRuntimeContext } from 'vtex.render-runtime'
 
 import styles from '../styles.css'
 import {
@@ -186,7 +187,8 @@ class MyReturnsPage extends Component<any, any> {
   }
 
   getProfile = () => {
-    this.props.fetchApi(fetchPath.getProfile).then((response) => {
+    const { rootPath } = this.props.runtime.route
+    this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState((prevState: any) => ({
           profile: {
@@ -659,4 +661,4 @@ class MyReturnsPage extends Component<any, any> {
   }
 }
 
-export default injectIntl(MyReturnsPage)
+export default injectIntl(withRuntimeContext(MyReturnsPage))

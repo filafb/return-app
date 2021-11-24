@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { Spinner, Button, Alert } from 'vtex.styleguide'
 import { injectIntl, defineMessages } from 'react-intl'
 import { Mutation } from 'react-apollo'
+import { withRuntimeContext } from 'vtex.render-runtime'
 
 import {
   productStatuses,
@@ -111,7 +112,8 @@ class ReturnsDetails extends Component<any, any> {
   }
 
   async getProfile() {
-    return this.props.fetchApi(fetchPath.getProfile).then((response) => {
+    const { rootPath } = this.props.runtime.route
+    return this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState({
           registeredUser: `${response.data.FirstName} ${response.data.LastName}`,
@@ -325,4 +327,4 @@ class ReturnsDetails extends Component<any, any> {
   }
 }
 
-export default injectIntl(ReturnsDetails)
+export default injectIntl(withRuntimeContext(ReturnsDetails))

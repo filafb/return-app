@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { ContentWrapper } from 'vtex.my-account-commons'
 import { Button, Spinner } from 'vtex.styleguide'
 import { defineMessages, injectIntl } from 'react-intl'
+import { withRuntimeContext } from 'vtex.render-runtime'
 
 import {
   schemaTypes,
@@ -182,7 +183,8 @@ class MyReturnsPageAdd extends Component<any, State> {
   }
 
   getProfile() {
-    return this.props.fetchApi(fetchPath.getProfile).then((response) => {
+    const { rootPath } = this.props.runtime.route
+    return this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState({
           userId: response.data.UserId,
@@ -1007,4 +1009,4 @@ class MyReturnsPageAdd extends Component<any, State> {
   }
 }
 
-export default injectIntl(MyReturnsPageAdd)
+export default injectIntl(withRuntimeContext(MyReturnsPageAdd))

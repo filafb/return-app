@@ -14,6 +14,7 @@ import {
   Input,
   Alert,
 } from 'vtex.styleguide'
+import { withRuntimeContext } from 'vtex.render-runtime'
 
 import {
   returnFormDate,
@@ -206,7 +207,8 @@ class ReturnForm extends Component<any, any> {
   }
 
   async getProfile() {
-    return this.props.fetchApi(fetchPath.getProfile).then((response) => {
+    const { rootPath } = this.props.runtime.route
+    return this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
       if (response.data.IsUserDefined) {
         this.setState({
           registeredUser: `${response.data.FirstName} ${response.data.LastName}`,
@@ -1217,4 +1219,4 @@ class ReturnForm extends Component<any, any> {
   }
 }
 
-export default injectIntl(ReturnForm)
+export default injectIntl(withRuntimeContext(ReturnForm))
