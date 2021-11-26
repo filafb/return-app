@@ -188,24 +188,24 @@ class MyReturnsPage extends Component<any, any> {
 
   getProfile = () => {
     const { rootPath } = this.props.runtime.route
-    this.props.fetchApi(fetchPath.getProfile(rootPath)).then((response) => {
-      if (response.data.IsUserDefined) {
+    fetch(fetchPath.getProfile(rootPath)).then(res => res.json()).then((response) => {
+      if (response.IsUserDefined) {
         this.setState((prevState: any) => ({
           profile: {
             ...prevState.profile,
-            Email: response.data.Email,
-            FirstName: response.data.FirstName,
-            Gender: response.data.Gender,
-            IsReturningUser: response.data.IsReturningUser,
-            IsUserDefined: response.data.IsUserDefined,
-            LastName: response.data.LastName,
-            UserId: response.data.UserId,
+            Email: response.Email,
+            FirstName: response.FirstName,
+            Gender: response.Gender,
+            IsReturningUser: response.IsReturningUser,
+            IsUserDefined: response.IsUserDefined,
+            LastName: response.LastName,
+            UserId: response.UserId,
           },
         }))
 
-        this.getRequests(response.data.UserId, false)
+        this.getRequests(response.UserId, false)
       }
-    })
+    }).catch(console.log)
   }
 
   getRequests(userId: string, resetFilters: boolean) {
